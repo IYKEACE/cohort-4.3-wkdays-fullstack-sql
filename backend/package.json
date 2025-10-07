@@ -7,9 +7,10 @@
   "scripts": {
     "start": "node app.js",
     "dev": "node --watch app.js",
-    "migrate:post": "node database/migration/002_create_post.js",
+    "migrate:posts": "node database/migration/002_create_post.js",
     "migrate:users": "node database/migration/001_create_users.js",
-    "seed:users": "node database/seed/001_seed_users.js"
+    "seed:users": "node database/seed/001_seed_users.js",
+    "seed:posts": "node database/seed/002_seed_post.js"
   },
   "keywords": [
     "node",

@@ -5,12 +5,13 @@ import { pool } from "../connection.js";
 async function createPostTable() {
   try {
     await pool.query(`
-      CREATE TABLE IF NOT EXISTS users (
+      CREATE TABLE IF NOT EXISTS posts (
       id SERIAL PRIMARY KEY,
+      post_owner_id INTEGER NOT NULL,
       post_tittle VARCHAR(150) NOT NULL,
       post_desc TEXT NOT NULL,
       post_comment TEXT,
-      user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+      FOREIGN KEY (post_owner_id) REFERENCES users(id) ON DELETE CASCADE,
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
     `);
