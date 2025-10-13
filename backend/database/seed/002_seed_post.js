@@ -1,5 +1,5 @@
 import { pool } from "../connection.js";
-im
+
 
 async function seedPostData() {
   try {
