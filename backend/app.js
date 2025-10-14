@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import createConnectionToDB from "../backend/database/connection.js";
 import authRoutes from "./routes/auth.route.js";
+import morgan from "morgan";
 
 dotenv.config();
 
@@ -9,6 +10,9 @@ const app = express();
 //middlewere/parser
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// loggers
+app.use(morgan("dev"));
 
 const port = process.env.PORT || 3000;
 
