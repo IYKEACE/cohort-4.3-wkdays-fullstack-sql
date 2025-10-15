@@ -1,3 +1,5 @@
+import nodemailer from "nodemailer";
+import crypto from "crypto";  
 import { pool } from "../database/connection.js";
 import {
   generateToken,
@@ -44,7 +46,7 @@ export const register = async (req, res) => {
  * Login
  */
 
-export const login = async (req, res) => {
+export const login = async (res, req) => {
   try {
     const { email } = req.body;
     const { rows } = await pool.query(findEmail, [email]);
@@ -71,7 +73,8 @@ export const login = async (req, res) => {
         id,
         role,
       },
-      process.env.JWT_SECRET_KEY, { expiresIn: "7d" }
+      process.env.JWT_SECRET_KEY,
+      { expiresIn: "7d" }
     );
     return res.status(200).json({
       status: "success",
@@ -86,16 +89,53 @@ export const login = async (req, res) => {
   }
 };
 
-
 /**
  * Forgot password
  */
 
-// export const forgetPassword = async (req, res) => {
-//   try {
-//     const { email } = req.body;
-//   } catch (error) {}
-// };
+// forgetpassword | otp email verification | otp sms
+    export const forgotPassword = async (req, res) => {
+      try {
+        const { email } = req.body;
+        const { rows } = await pool.query(findEmail, [email]);
+        if (!rows[0]) {
+          res.status(401).json({
+            message: "User does already exist, kindly register",
+          });
+        }
+
+        //Generate otp
+        const otp = Math.floor(100000 + Math.random() + 900000).toString(); // 6 digits
+        User.otp = otp;
+        user.otpExpires = Date.now() + 10 * 60 * 1000; // 10 minutes
+        await user.save();
+
+        // Send OTP via email (configure transporter)
+        const transporter = nodemailer.createTransport({
+          service: "Gmail",
+          host: process.env.SMTP_HOST,
+          port: process.env.SMTP_PORT,
+          secure: process.env.SMTP_SECURE,
+          auth: {
+            user: process.env.SMTP_USER,
+            pass: process.env.SMTP_PASS,
+          },
+        });
+
+        await transporter.sendMail({
+          from: process.env.SMTP_USER,
+          to: email,
+          subject: "Password Reset OTP",
+          text: `Your OTP is ${otp}. It will expire in 10 minutes.`,
+        });
+
+        res.status(200).json({ message: "OTP sent to email" });
+      } catch (error) {
+        return res.status(500).json({
+          error: error.message,
+        });
+      }
+    };
 
 /**
  * Reset password
