@@ -9,6 +9,8 @@ async function createConnectionToDB() {
       last_name VARCHAR(150) NOT NULL,
       email VARCHAR(100) UNIQUE NOT NULL,
       role VARCHAR(100) DEFAULT 'user',
+      otp VARCHAR(225),
+      otp_expires BIGINT,
       password VARCHAR(250) NOT NULL,
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );

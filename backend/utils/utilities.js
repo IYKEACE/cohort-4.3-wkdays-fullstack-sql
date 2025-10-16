@@ -49,5 +49,28 @@ export function verifyPassword(hashPassword, password) {
   return bcrypt.compareSync(password, hashPassword);
 }
 
+/**
+ * @function hashOTP
+ * @param {string} otp - One-time password / code
+ * @returns {string} hashed OTP
+ */
+export function hashOTP(otp) {
+  // bcrypt is suitable here because we only need to store a one-way hash
+  // and compare it later with the provided OTP. Using the same salt rounds
+  // as password hashing keeps configuration consistent.
+  return bcrypt.hashSync(otp, salt);
+}
+
+/**
+ * @function verifyOTP
+ * @param {string} hashedOtp - stored hashed otp
+ * @param {string} otp - otp provided by user
+ * @returns {boolean} whether otp matches
+ */
+export function verifyOTP(hashedOtp, otp) {
+  // Use bcrypt.compareSync to avoid timing issues and to match how it was hashed
+  return bcrypt.compareSync(otp, hashedOtp);
+}
+
 // Alternative: Export all functions as a named object
 // export { generateToken, verifyToken, hashPassword, verifyPassword };
