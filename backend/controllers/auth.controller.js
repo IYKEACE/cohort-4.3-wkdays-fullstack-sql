@@ -7,7 +7,15 @@ import {
   hashPassword,
   verifyPassword,
 } from "../utils/utilities.js";
-import { registerUser, findEmail } from "../database/queries/sql.js";
+import {
+  registerUser,
+  findEmail,
+  passwordReset,
+  singleUserById,
+  allUsers,
+  updateUsers,
+  deleteUserById,
+} from "../database/queries/sql.js";
 
 // Full CRUD application
 
@@ -47,7 +55,7 @@ export const register = async (req, res) => {
  * Login
  */
 
-export const login = async (res, req) => {
+export const login = async (req, res) => {
   try {
     const { email } = req.body;
     const { rows } = await pool.query(findEmail, [email]);
@@ -106,8 +114,16 @@ export const forgotPassword = async (req, res) => {
     }
 
     // Generate OTP
-    const otp = crypto.randomInt(100000, 999999).toString(); // 6 digits
+    const otp = Math.floor(100000 + Math.random() * 900000).toString(); // 6 digits
     const otpExpires = Date.now() + 10 * 60 * 1000; // 10 minutes
+
+    await pool.query(
+      `UPDATE users SET otp = $1, otp_expires = $2 WHERE email = $3`,
+      [otp, otpExpires, email]
+    );
+
+    // const otp = crypto.randomInt(100000, 999999).toString(); // 6 digits
+    // const otpExpires = Date.now() + 10 * 60 * 1000; // 10 minutes
     // Hash the OTP before storing
     const hashedOtp = hashOTP(otp);
     await pool.query(
@@ -145,7 +161,133 @@ export const forgotPassword = async (req, res) => {
 /**
  * Reset password
  */
+export const resetPassword = async (req, res) => {
+  try {
+    const { email, otp, newPassword } = req.body;
+    if (!email || !otp || !newPassword) {
+      return res
+        .status(400)
+        .json({ message: "email, otp and newPassword required" });
+    }
+
+    const { rows } = await pool.query(findEmail, [email]);
+    const user = rows[0];
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Check expiration
+    if (
+      !user.otp ||
+      !user.otp_expires ||
+      Date.now() > Number(user.otp_expires)
+    ) {
+      return res.status(400).json({ message: "OTP expired or not set" });
+    }
+
+    // Verify hashed OTP
+    const isValid = verifyOTP(user.otp, otp);
+    if (!isValid) {
+      return res.status(400).json({ message: "Invalid OTP" });
+    }
+
+    // Hash new password and update, clear OTP fields
+    const hashedpassword = hashPassword(newPassword);
+    await pool.query(passwordReset, [hashedpassword, email]);
+
+    return res.status(200).json({ message: "Password reset successful" });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
 
 /**
- * Verify otp
+ * get single users
  */
+export const getSingleUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const { rows } = await pool.query(singleUserById, [id]);
+
+    if (rows.length === 0) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    return res.status(200).json(rows[0]);
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
+/**
+ * gET ALL USERS
+ */
+
+/**
+ * get all user
+ */
+
+export const getAllUsers = async (req, res) => {
+  try {
+    const { rows } = await pool.query(allUsers);
+
+    if (rows.length === 0) {
+      return res.status(404).json({ message: "No users found" });
+    }
+
+    res.status(200).json({
+      message: "Users fetched successfully",
+      users: rows,
+    });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
+/**
+ * Update user
+ */
+
+export const updateUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { first_name, last_name, email, password } = req.body;
+    const hashedpassword = hashPassword(password);
+    const { rows } = await pool.query(updateUsers, [
+      first_name,
+      last_name,
+      email,
+      hashedpassword,
+      id,
+    ]);
+
+    if (rows.length === 0) {
+      res.status(404).json({ message: "User not found" });
+    }
+
+    return res.status(200).json({
+      message: "User updated successfully",
+    });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
+/**
+ * delete user
+ */
+export const deleteUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { rows } = await pool.query(deleteUserById, [id]);
+
+    if (rows.length === 0) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    return res.status(200).json({ message: "User deleted successfully" });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
