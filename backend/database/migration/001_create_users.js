@@ -1,8 +1,7 @@
 import { pool } from "../connection.js";
 
-async function createConnectionToDB() {
-  try {
-    await pool.query(`
+const userTable = `
+      DROP TABLE IF EXISTS users CASCADE;
       CREATE TABLE IF NOT EXISTS users (
       id SERIAL PRIMARY KEY,
       first_name VARCHAR(150) NOT NULL,
@@ -14,7 +13,11 @@ async function createConnectionToDB() {
       password VARCHAR(250) NOT NULL,
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
-    `);
+    `;
+
+async function createConnectionToDB() {
+  try {
+    const create = await pool.query(userTable);
     console.log("Users table created successully.");
     process.exit(0);
   } catch (error) {
