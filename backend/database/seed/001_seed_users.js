@@ -5,7 +5,6 @@ const passkey = process.env.PASSWORD;
 const salt = process.env.SALT;
 const hashedPassword = hashPassword(passkey, salt);
 
-
 async function seedUserData() {
   try {
     await pool.query(`
