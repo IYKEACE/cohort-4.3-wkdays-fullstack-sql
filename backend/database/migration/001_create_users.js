@@ -21,13 +21,10 @@ async function createConnectionToDB() {
     console.log(
       `users table ${create[0].command}PED and ${create[1].command}D`
     );
-    console.log("CREATED =====", create);
     console.log("User table created successfully");
-    process.exit(0);
   } catch (error) {
     console.log("User migration failed", error);
-    process.exit(1);
   }
 }
 
-createConnectionToDB();
+export default createConnectionToDB;

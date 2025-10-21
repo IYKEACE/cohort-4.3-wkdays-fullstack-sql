@@ -11,11 +11,9 @@ async function seedPostData() {
       (3,'Integrity was key', 'We saw the future we were motivated', 'wonderful')
     `);
     console.log("post seeded successully.");
-    process.exit(0);
   } catch (error) {
     console.log("seed migration failed", error);
-    process.exit(1);
   }
 }
 
-seedPostData();
+export default seedPostData;

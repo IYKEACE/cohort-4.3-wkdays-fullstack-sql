@@ -2,11 +2,10 @@
 
 import { pool } from "../connection.js";
 
-async function createPostTable() {
-  try {
-    await pool.query(`
+const postTable = `
+    DROP TABLE IF EXISTS posts CASCADE;
       CREATE TABLE IF NOT EXISTS posts (
-      id SERIAL PRIMARY KEY,
+      post_id SERIAL PRIMARY KEY,
       post_owner_id INTEGER NOT NULL,
       post_tittle VARCHAR(150) NOT NULL,
       post_desc TEXT NOT NULL,
@@ -14,13 +13,18 @@ async function createPostTable() {
       FOREIGN KEY (post_owner_id) REFERENCES users(id) ON DELETE CASCADE,
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
-    `);
+    `;
+
+async function createPostTable() {
+  try {
+    const create = await pool.query(postTable);
+    console.log(
+      `posts table ${create[0].command}PED and posts table ${create[1]}D`
+    );
     console.log("post table created successully.");
-    process.exit(0);
   } catch (error) {
     console.log("post migration failed", error);
-    process.exit(1);
   }
 }
 
-createPostTable();
+export default createPostTable;
