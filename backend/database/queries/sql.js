@@ -19,4 +19,7 @@ export const updateUsers =
 
 export const deleteUserById = "DELETE FROM users WHERE id = $1 RETURNING *";
 
+
+export const findPost = "SELECT * FROM posts WHERE id = $1";
+
 // SELECT ALL WHERE EMAIL = $1

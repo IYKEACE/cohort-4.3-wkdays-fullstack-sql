@@ -3,11 +3,13 @@ import {
   forgotPassword,
   register,
   resetPassword,
-  getSingleUser,
+} from "../controllers/auth.controller.js";
+import {
   getAllUsers,
+  getSingleUser,
   updateUser,
   deleteUser,
-} from "../controllers/auth.controller.js";
+} from "../controllers/users.controller.js";
 import { login } from "../controllers/auth.controller.js";
 
 const router = express.Router();
