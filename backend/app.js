@@ -17,7 +17,7 @@ app.use(morgan("dev"));
 app.use(cors());
 const port = process.env.PORT || 3000;
 
-app.get("/home", (req, res) => {
+app.get("/", (req, res) => {
   res.status(200).json({
     message: "welcome to SQL Database",
   });
