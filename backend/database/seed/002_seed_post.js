@@ -16,4 +16,6 @@ async function seedPostData() {
   }
 }
 
+// console.log(nothing happened)
+
 export default seedPostData;
