@@ -127,17 +127,25 @@ export const forgotPassword = async (req, res) => {
       [hashedOtp, otpExpires, email]
     );
 
-    // Send OTP via email (configure transporter)
     const transporter = nodemailer.createTransport({
-      service: "Gmail",
-      host: process.env.SMTP_HOST,
-      port: process.env.SMTP_PORT,
-      secure: process.env.SMTP_SECURE,
+      service: "gmail",
       auth: {
         user: process.env.SMTP_USER,
         pass: process.env.SMTP_PASS,
       },
     });
+
+    // Send OTP via email (configure transporter)
+    // const transporter = nodemailer.createTransport({
+    //   service: "Gmail",
+    //   host: process.env.SMTP_HOST,
+    //   port: process.env.SMTP_PORT,
+    //   secure: process.env.SMTP_SECURE,
+    //   auth: {
+    //     user: process.env.SMTP_USER,
+    //     pass: process.env.SMTP_PASS,
+    //   },
+    // });
 
     await transporter.sendMail({
       from: process.env.SMTP_USER,
