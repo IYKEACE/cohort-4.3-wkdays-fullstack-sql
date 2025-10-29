@@ -102,9 +102,10 @@ export const login = async (req, res) => {
 export const forgotPassword = async (req, res) => {
   try {
     const { email } = req.body;
+
     const { rows } = await pool.query(findEmail, [email]);
     if (!rows[0]) {
-      res.status(401).json({
+      return res.status(404).json({
         message: "User does not exist, kindly register",
       });
     }
@@ -112,21 +113,15 @@ export const forgotPassword = async (req, res) => {
     // Generate OTP
     const otp = Math.floor(100000 + Math.random() * 900000).toString(); // 6 digits
     const otpExpires = Date.now() + 10 * 60 * 1000; // 10 minutes
-
-    await pool.query(
-      `UPDATE users SET otp = $1, otp_expires = $2 WHERE email = $3`,
-      [otp, otpExpires, email]
-    );
-
-    // const otp = crypto.randomInt(100000, 999999).toString(); // 6 digits
-    // const otpExpires = Date.now() + 10 * 60 * 1000; // 10 minutes
-    // Hash the OTP before storing
     const hashedOtp = hashOTP(otp);
+
+    // Update user with hashed OTP
     await pool.query(
       "UPDATE users SET otp = $1, otp_expires = $2 WHERE email = $3",
       [hashedOtp, otpExpires, email]
     );
 
+    // Nodemailer Transporter (Gmail config)
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
@@ -135,18 +130,6 @@ export const forgotPassword = async (req, res) => {
       },
     });
 
-    // Send OTP via email (configure transporter)
-    // const transporter = nodemailer.createTransport({
-    //   service: "Gmail",
-    //   host: process.env.SMTP_HOST,
-    //   port: process.env.SMTP_PORT,
-    //   secure: process.env.SMTP_SECURE,
-    //   auth: {
-    //     user: process.env.SMTP_USER,
-    //     pass: process.env.SMTP_PASS,
-    //   },
-    // });
-
     await transporter.sendMail({
       from: process.env.SMTP_USER,
       to: email,
@@ -154,11 +137,10 @@ export const forgotPassword = async (req, res) => {
       text: `Your OTP is ${otp}. It will expire in 10 minutes.`,
     });
 
-    res.status(200).json({ message: "OTP sent to email" });
+    return res.status(200).json({ message: "OTP sent to email" });
   } catch (error) {
-    return res.status(500).json({
-      error: error.message,
-    });
+    console.error("Forgot password error:", error);
+    return res.status(500).json({ error: "Server error" });
   }
 };
 
