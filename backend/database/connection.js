@@ -7,12 +7,15 @@ const { Pool } = pg;
 
 const connectionString = process.env.DATABASE_URL;
 
+// detect environment
+const isRender =
+  process.env.RENDER === "true" || process.env.NODE_ENV === "production";
+
 export const pool = new Pool({
   connectionString,
-  ssl: {
-    require: true,
-    rejectUnauthorized: false,
-  },
+  ssl: isRender
+    ? { require: true, rejectUnauthorized: false } // for Render
+    : false, // for local dev
 });
 
 const createConnectionToDB = async () => {
