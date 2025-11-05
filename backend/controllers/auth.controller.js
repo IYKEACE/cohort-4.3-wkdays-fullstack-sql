@@ -104,7 +104,7 @@ export const forgotPassword = async (req, res) => {
     const { email } = req.body;
     const { rows } = await pool.query(findEmail, [email]);
     if (!rows[0]) {
-      res.status(401).json({
+      return res.status(401).json({
         message: "User does not exist, kindly register",
       });
     }
@@ -112,16 +112,6 @@ export const forgotPassword = async (req, res) => {
     // Generate OTP
     const otp = Math.floor(100000 + Math.random() * 900000).toString(); // 6 digits
     const otpExpires = Date.now() + 10 * 60 * 1000; // 10 minutes
-
-    await pool.query(
-      `UPDATE users SET otp = $1, otp_expires = $2 WHERE email = $3`,
-      [otp, otpExpires, email]
-    );
-
-    // const otp = crypto.randomInt(100000, 999999).toString(); // 6 digits
-    // const otpExpires = Date.now() + 10 * 60 * 1000; //
-    //  10 minutes
-    // Hash the OTP before storing
     const hashedOtp = hashOTP(otp);
     await pool.query(
       "UPDATE users SET otp = $1, otp_expires = $2 WHERE email = $3",
@@ -130,10 +120,7 @@ export const forgotPassword = async (req, res) => {
 
     // Send OTP via email (configure transporter)
     const transporter = nodemailer.createTransport({
-      service: "Gmail",
-      host: process.env.SMTP_HOST,
-      port: process.env.SMTP_PORT,
-      secure: process.env.SMTP_SECURE,
+      service: "gmail",
       auth: {
         user: process.env.SMTP_USER,
         pass: process.env.SMTP_PASS,
@@ -146,7 +133,7 @@ export const forgotPassword = async (req, res) => {
       subject: "Password Reset OTP",
       text: `Your OTP is ${otp}. It will expire in 10 minutes.`,
     });
-
+    
     res.status(200).json({ message: "OTP sent to email" });
   } catch (error) {
     return res.status(500).json({
@@ -157,22 +144,22 @@ export const forgotPassword = async (req, res) => {
 
 /**
  * Reset password
- */
+*/
 export const resetPassword = async (req, res) => {
   try {
     const { email, otp, newPassword } = req.body;
     if (!email || !otp || !newPassword) {
       return res
-        .status(400)
-        .json({ message: "email, otp and newPassword required" });
+      .status(400)
+      .json({ message: "email, otp and newPassword required" });
     }
-
+    
     const { rows } = await pool.query(findEmail, [email]);
     const user = rows[0];
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
-
+    
     // Check expiration
     if (
       !user.otp ||
@@ -181,19 +168,36 @@ export const resetPassword = async (req, res) => {
     ) {
       return res.status(400).json({ message: "OTP expired or not set" });
     }
-
+    
     // Verify hashed OTP
     const isValid = verifyOTP(user.otp, otp);
     if (!isValid) {
       return res.status(400).json({ message: "Invalid OTP" });
     }
-
+    
     // Hash new password and update, clear OTP fields
     const hashedpassword = hashPassword(newPassword);
     await pool.query(passwordReset, [hashedpassword, email]);
-
+    
     return res.status(200).json({ message: "Password reset successful" });
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+//for forget password
+    // const otp = crypto.randomInt(100000, 999999).toString(); // 6 digits
+    // const otpExpires = Date.now() + 10 * 60 * 1000; //
+    //  10 minutes
+    // Hash the OTP before storing
