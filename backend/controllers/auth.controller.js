@@ -119,7 +119,8 @@ export const forgotPassword = async (req, res) => {
     );
 
     // const otp = crypto.randomInt(100000, 999999).toString(); // 6 digits
-    // const otpExpires = Date.now() + 10 * 60 * 1000; // 10 minutes
+    // const otpExpires = Date.now() + 10 * 60 * 1000; //
+    //  10 minutes
     // Hash the OTP before storing
     const hashedOtp = hashOTP(otp);
     await pool.query(
