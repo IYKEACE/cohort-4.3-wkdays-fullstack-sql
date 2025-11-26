@@ -1,0 +1,45 @@
+nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem 0;
+}
+.navLists {
+  display: flex;
+  gap: 1rem;
+}
+.activeLink {
+  color: #458ff6;
+  border-bottom: 3px solid  #458ff6;
+}
+.icons{
+  display: none;
+  cursor: pointer;
+  font-size: 2rem;
+}
+
+/* MEDIA QUERIES */
+
+@media screen and (max-width: 768px) {
+  .navLists{
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 5rem;
+    right: 0;
+    background: #fff;
+    width: 200px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    z-index: 1000;
+    padding: 1.5rem 1rem;
+  }
+  .icons{
+    display: block;
+    position: absolute;
+    top: 1.5rem;
+    right: 2rem;
+    z-index: 1001;
+  }
+  .showMenu {
+    display: flex;
+  }
+}

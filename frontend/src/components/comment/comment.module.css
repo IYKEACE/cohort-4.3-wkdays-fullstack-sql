@@ -1,0 +1,65 @@
+.testContainer {
+  background: linear-gradient(208.18deg, #67c3f3 9.05%, #5a98f2 76.74%);
+  padding: 4rem 2rem;
+  width: 98%;
+  margin: 2rem auto 0 auto;
+  border-radius: 20px;
+  margin-top: 8rem;
+  margin-bottom: 12rem;
+}
+.testContent {
+  display: flex;
+  justify-content: space-around;
+}
+.head {
+  text-align: center;
+  font-size: 25px;
+  color: #fff;
+  margin-bottom: 3rem;
+}
+.line {
+  border: none;
+  border-top: 2px solid #fff;
+  width: 40px;
+  margin: 18px auto 0 auto; /* top margin, auto left/right centers it */
+  display: block;
+}
+.imo {
+  border-radius: 20rem;
+  width: 90px;
+  border: #ffffff solid 4px;
+}
+.new {
+  color: #fff;
+  font-size: 15x;
+}
+.circle {
+  color: #fff;
+  font-size: 14px;
+}
+.man {
+  display: flex;
+  gap: 16px;
+}
+.term {
+  align-items: center;
+  align-content: center;
+  line-height: 25px;
+}
+.desc {
+  color: #fff;
+  font-size: 14px;
+}
+
+@media screen and (max-width: 768px) {
+  .testContent {
+    flex-direction: column;
+    align-items: center;
+  }
+  .head {
+    font-size: 20px;
+  }
+  .imo {
+    width: 80px;
+  }
+}

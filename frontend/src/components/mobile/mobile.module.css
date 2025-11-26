@@ -1,0 +1,58 @@
+.ProductContent {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8rem;
+  margin-bottom: 5rem;
+}
+.topProduct {
+  margin-top: 3rem;
+  font-size: 20px;
+  margin-bottom: 3rem;
+}
+.ded {
+  color: #7d7987;
+  margin-top: 2rem;
+}
+.btn {
+  padding: 15px 35px;
+  margin-top: 3rem;
+  border-radius: 2rem;
+  color: #4a90e2;
+  border: #4a90e2 solid 2px;
+  cursor: pointer;
+}
+.down {
+  width: 95%;
+}
+.lines {
+  border: none;
+  border-top: 2px solid #333;
+  width: 40px;
+  margin: 16px 0 0 0; /* top margin, no left/right auto */
+  display: block;
+  text-align: left; /* not required for hr, but fine */
+}
+
+@media screen and (max-width: 768px) {
+  .ProductContent {
+    flex-direction: column;
+    align-items: center;
+  }
+  .topProduct {
+    text-align: center;
+  }
+  .ded {
+    text-align: center;
+  }
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+  .down {
+    width: 100%;
+  }
+  .lines {
+    margin: 16px auto 0 auto; /* top margin, auto left/right centers it */
+    display: block;
+  }
+}

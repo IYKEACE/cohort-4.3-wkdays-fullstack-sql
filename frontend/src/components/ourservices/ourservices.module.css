@@ -1,0 +1,77 @@
+.head {
+  text-align: center;
+  font-size: 30px;
+}
+hr {
+  border: none;
+  border-top: 2px solid #333;
+  width: 40px;
+  margin: 18px auto 0 auto; /* top margin, auto left/right centers it */
+  display: block;
+}
+.description {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-top: 2rem;
+}
+.serviceContent {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; 
+  align-items: center;
+  gap: 2rem; 
+  /* margin-top: 2rem;  */
+  padding: 0 2rem; 
+  /* background-color: #000; */
+}
+.servicesOne {
+  border-radius: 1rem;
+  box-shadow: 10px 40px 50px 0px #e5e9f666;
+  /* box-shadow: rgba(179, 176, 176, 0.24) 0px 3px 8px ; */
+  padding: 2rem;
+  background-color: #ffffff;
+}
+.pix {
+  margin-bottom: 1.5rem;
+}
+h3 {
+  margin-bottom: 1rem;
+}
+.desc {
+  line-height: 1.5;
+  color: #7d7987;
+}
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem auto 0 auto; /* centers horizontally and adds top margin */
+  width: fit-content; /* shrink to fit content */
+  padding: 10px 25px;
+  border-radius: 2rem;
+  color: #4a90e2;
+  border: #4a90e2 solid 2px;
+  cursor: pointer;
+  margin-top: 2rem;
+}
+
+
+
+/* MEDIA QUERIES */
+
+@media screen and (max-width: 768px) {
+  .serviceContent {
+    flex-direction: column; /* stack items vertically on smaller screens */
+    align-items: center; /* center items */
+    gap: 1.5rem; /* add some space between items */
+  }
+  .servicesOne {
+    width: 100%; /* make each service take full width on small screens */
+    max-width: 400px; /* limit the maximum width for better readability */
+  }
+  .btn {
+    width: fit-content; /* shrink to fit content */
+    padding: 12px 24px;
+  }
+  
+}
