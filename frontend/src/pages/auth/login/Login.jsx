@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { login } from "../../../utils/auth";
 import styles from "./login.module.css";
 
 const Login = () => {
@@ -19,7 +20,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch("http://localhost:2025/api/v1/auth/login", {
+      const res = await fetch("http://localhost:2025/api/v1/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -29,9 +30,10 @@ const Login = () => {
       console.log("DATA LOGIN VALUES", data);
 
       if (res.status === 200) {
+        login(data.token);
+
         toast.success(data.message || "Login successful!");
-        // Redirect to dashboard page
-        navigate("/auth/dashboard");
+        navigate("/dashboard");
       } else {
         toast.error(data.error || "Login failed");
       }

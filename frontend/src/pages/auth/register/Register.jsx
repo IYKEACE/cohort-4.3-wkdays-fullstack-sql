@@ -2,20 +2,17 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./register.module.css";
-// import "./register.module.css";
 
 const Register = () => {
   const [formData, setFormData] = useState({
-    firstname: "",
-    lastname: "",
+    first_name: "",
+    last_name: "",
     email: "",
     address: "",
     password: "",
   });
 
   const navigate = useNavigate();
-
-  // function to handle change
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -23,32 +20,26 @@ const Register = () => {
     });
   };
 
-  // handleSumbit
-  const handleSumbit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("Form is being submitted...", formData);
 
     try {
-      //
-      const res = await fetch("http://localhost:2025/api/v1/auth/create-user", {
+      const res = await fetch("http://localhost:2025/api/v1/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
-      console.log("RES", res);
-      const data = await res.json();
-      console.log("DATA REGISTER VALUES", data);
-      if (res.status === 201) {
-        // or show a success message
-        toast.success(data.message || "Registered successfully");
-        // Redirect to login page
+      if (res.status === 201 || res.status === 204) {
+        toast.success("Registered successfully");
         navigate("/auth/login");
-      } else {
-        console.log(data.error);
-        toast.error(data.error || "Registration failed");
+        return;
       }
+      const data = await res.json();
+      toast.error(data.error || "Registration failed");
     } catch (error) {
-      console.error(error);
-      toast.error(error.message || "Registration failed");
+      console.error("Fetch Error:", error);
+      toast.error("Server error. Check your connection.");
     }
   };
 
@@ -57,25 +48,24 @@ const Register = () => {
       <Link to="/" className={styles.homeLink}>
         Home
       </Link>
-      <form onSubmit={handleSumbit}>
+
+      <form onSubmit={handleSubmit}>
         <h1>Register</h1>
         <div>
           <input
-            name="firstname"
+            name="first_name"
             type="text"
             placeholder="enter firstname"
-            id="firstname"
-            value={formData.firstname}
+            value={formData.first_name}
             onChange={handleChange}
           />
         </div>
         <div>
           <input
-            name="lastname"
+            name="last_name"
             type="text"
             placeholder="enter lastname"
-            id="lastname"
-            value={formData.lastname}
+            value={formData.last_name}
             onChange={handleChange}
           />
         </div>
@@ -84,7 +74,6 @@ const Register = () => {
             name="email"
             type="email"
             placeholder="enter email"
-            id="email"
             value={formData.email}
             onChange={handleChange}
           />
@@ -94,31 +83,31 @@ const Register = () => {
             name="password"
             type="password"
             placeholder="enter password"
-            id="password"
             value={formData.password}
             onChange={handleChange}
           />
         </div>
-
         <div>
           <input
             name="address"
             type="text"
             placeholder="enter address"
-            id="address"
             value={formData.address}
             onChange={handleChange}
           />
         </div>
+
         <div className={styles.authLinkContainer}>
           <p>Already have an account? </p>
           <Link className={styles.authLink} to="/auth/login">
             Login
           </Link>
         </div>
+
         <button type="submit">Submit</button>
       </form>
     </div>
   );
 };
+
 export default Register;

@@ -1,27 +1,75 @@
+import React from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
-import { logout } from "../../utils/auth";
+import {
+  BiCog,
+  BiStats,
+  BiBulb,
+  BiBoltCircle,
+  BiGroup,
+  BiTask,
+  BiLogOut,
+} from "react-icons/bi";
+import styles from "./dashboard.module.css";
 
 const Dashboard = () => {
-  const navigae = useNavigate();
+  const navigate = useNavigate();
 
-  // handle logout
   const logoutUser = () => {
-    logout();
-    navigae("/auth/login");
+    localStorage.clear();
+    navigate("/auth/login");
   };
 
   return (
-    <div className="container">
-      <h1>Dashbaord</h1>
-      <p>Welcome to your dashboard</p>
+    <div className={styles.dashboardWrapper}>
+      <div className={styles.menu}>
+        <div className={styles.logo}>
+          <img src="/TESLA.png" alt="Logo" />
+        </div>
 
-      <div>
-        <Link to="/dashboard/profile">Profile</Link>
-        <Link to="/dashboard/users">Users</Link>
-        <Link to="/dashboard/settings">Settings</Link>
-        <button onClick={logoutUser}>Logout</button>
+        <div className={styles.list}>
+          <Link to="/dashboard" className={styles.item}>
+            <BiStats /> Reports
+          </Link>
+          <Link to="/dashboard/library" className={styles.item}>
+            <BiBoltCircle /> Library
+          </Link>
+          <Link to="/dashboard/users" className={styles.item}>
+            <BiGroup /> People
+          </Link>
+          <Link to="/dashboard/activities" className={styles.item}>
+            <BiTask /> Activities
+          </Link>
+        </div>
+
+        <div className={styles.support}>
+          <h2>Support</h2>
+          <div className={styles.list}>
+            <Link to="/dashboard/get-started" className={styles.item}>
+              <BiBulb /> Get Started
+            </Link>
+            <Link to="/dashboard/settings" className={styles.item}>
+              <BiCog /> Settings
+            </Link>
+          </div>
+
+          <div className={styles.accountSection}>
+            <div className={styles.userProfile}>
+              <img src="/avatar.png" alt="User" className={styles.avatar} />
+              <div className={styles.userInfo}>
+                <span className={styles.userName}>Iyke Aceee</span>
+                <span className={styles.userEmail}>jesse@tesla.com</span>
+              </div>
+            </div>
+            <button onClick={logoutUser} className={styles.logoutButton}>
+              <BiLogOut />
+              <span>Logout</span>
+            </button>
+          </div>
+        </div>
       </div>
-      <Outlet />
+      <main className={styles.mainContent}>
+        <Outlet />
+      </main>
     </div>
   );
 };
