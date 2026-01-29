@@ -42,7 +42,7 @@ const Dashboard = () => {
         </div>
 
         <div className={styles.support}>
-          <h2>Support</h2>
+          <h2 className={styles.supportTitle}>Support</h2>
           <div className={styles.list}>
             <Link to="/dashboard/get-started" className={styles.item}>
               <BiBulb /> Get Started
@@ -54,15 +54,15 @@ const Dashboard = () => {
 
           <div className={styles.accountSection}>
             <div className={styles.userProfile}>
-              <img src="/avatar.png" alt="User" className={styles.avatar} />
+              <img src="/PIcture.jpeg" alt="User" className={styles.avatar} />
               <div className={styles.userInfo}>
                 <span className={styles.userName}>Iyke Aceee</span>
-                <span className={styles.userEmail}>jesse@tesla.com</span>
+                <span className={styles.userEmail}>iykee@tesla.com</span>
               </div>
             </div>
             <button onClick={logoutUser} className={styles.logoutButton}>
               <BiLogOut />
-              <span>Logout</span>
+              <span> Logout</span>
             </button>
           </div>
         </div>
