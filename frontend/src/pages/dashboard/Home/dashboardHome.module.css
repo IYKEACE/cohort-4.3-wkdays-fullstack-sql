@@ -148,7 +148,7 @@
 
 .chartWrapper {
   display: flex;
-  height: 250px; /* Adjust height to match your card */
+  height: 250px;
   gap: 15px;
   margin-top: 20px;
 }
@@ -159,12 +159,12 @@
   justify-content: space-between;
   color: #BABABA;
   font-size: 12px;
-  padding-bottom: 20px; /* Space for the day labels */
+  padding-bottom: 20px;
 }
 
 .chartContent {
   flex: 1;
-  position: relative; /* Allows grid lines to sit behind bars */
+  position: relative; 
   display: flex;
   flex-direction: column;
 }
@@ -188,7 +188,7 @@
 /* The Bars */
 .barsContainer {
   position: relative;
-  z-index: 2; /* Sits on top of lines */
+  z-index: 2;
   display: flex;
   justify-content: space-around;
   align-items: flex-end;
@@ -205,20 +205,20 @@
 .barPair {
   display: flex;
   align-items: flex-end;
-  gap: 4px; /* Space between the dark and light blue bar */
+  gap: 4px;
   height: 100%;
   padding-bottom: 5px;
 }
 
 .darkBar {
   width: 8px;
-  background-color: #1B59F8; /* Dark Blue from Figma */
+  background-color: #1B59F8;
   border-radius: 10px;
 }
 
 .lightBar {
   width: 8px;
-  background-color: #C6D7FF; /* Light Blue from Figma */
+  background-color: #C6D7FF;
   border-radius: 10px;
 }
 
@@ -228,27 +228,21 @@
   font-weight: 600;
   margin-top: 8px;
 }
-/* --- ADD THESE TO YOUR EXISTING CSS --- */
-
-/* This makes the two bars (dark & light) sit side-by-side for each month */
 .barPair {
   display: flex;
-  align-items: flex-end; /* Keeps them anchored to the bottom */
-  gap: 4px;              /* Space between the two bars */
+  align-items: flex-end; 
+  gap: 4px;
   height: 100%;
 }
 
 .darkBar {
-  background-color: #1B59F8; /* Figma Dark Blue */
+  background-color: #1B59F8;
 }
 
 .lightBar {
-  background-color: #C6D7FF; /* Figma Light Blue */
+  background-color: #C6D7FF;
 }
 
-/* --- ADDING THE BLUE WAVE EFFECT FOR STAT CARDS --- */
-
-/* This style adds that blue wave line you see in the Knowledge cards */
 .statCard:nth-child(n+4) { 
   position: relative;
   overflow: hidden;

@@ -26,10 +26,48 @@ export const usersData = [
     trend: "down",
     img: "/PIcture.jpeg",
   },
+  {
+    id: 4,
+    name: "Lura Silverman.",
+    points: 672,
+    accuracy: 88,
+    rank: 4,
+    trend: "up",
+    img: "/PIcture.jpeg",
+  },
 ];
 
 export const groupsData = [
-  { id: 1, name: "Houston Facility", points: 52, trend: "up", rank: 1 },
-  { id: 2, name: "Test Group", points: 52, trend: "down", rank: 2 },
-  { id: 3, name: "Sales Leadership", points: 52, trend: "up", rank: 3 },
+  {
+    id: 1,
+    name: "Houston Facility",
+    points: 52,
+    accuracy: 97,
+    trend: "up",
+    rank: 1,
+  },
+  {
+    id: 2,
+    name: "Test Group",
+    points: 52,
+    accuracy: 95,
+    trend: "down",
+    rank: 2,
+  },
+  {
+    id: 3,
+    name: "Sales Leadership",
+    points: 52,
+    accuracy: 87,
+    trend: "up",
+    rank: 3,
+  },
+  {
+    id: 4,
+    name: "Northeast Region",
+    points: 52,
+    accuracy: 87,
+    trend: "up",
+    rank: 4,
+  },
 ];

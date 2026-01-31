@@ -1,7 +1,7 @@
 /* THE GRID LAYOUT */
 .bottomSection {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* Two columns like Figma */
+  grid-template-columns: 1fr 1fr;
   gap: 20px;
   margin-top: 30px;
   width: 100%;
@@ -16,14 +16,12 @@
 
 .cardTitle {
   font-size: 12px;
-  color: #8C8C8C;
+  color: #8c8c8c;
   margin-bottom: 20px;
   text-transform: uppercase;
   font-weight: 600;
   letter-spacing: 0.5px;
 }
-
-/* TOPIC PROGRESS BAR STYLES */
 .topicItem {
   display: flex;
   align-items: center;
@@ -42,11 +40,11 @@
   font-size: 13px;
   margin-top: 11px;
   font-weight: 700;
-  color: #1A1A1A;
+  color: #1a1a1a;
 }
 
 .topicPercent {
-  color: #1A1A1A;
+  color: #1a1a1a;
 }
 
 .topicPercent small {
@@ -57,14 +55,14 @@
 
 .progressTrack {
   height: 8px;
-  background: #F5F7FA;
+  background: #f5f7fa;
   border-radius: 10px;
 }
 
 .progressBar {
   height: 100%;
   border-radius: 10px;
-  transition: width 1s ease-in-out; /* The live effect */
+  transition: width 1s ease-in-out;
 }
 
 /* LEADERBOARD ROW STYLES */
@@ -73,7 +71,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px 0;
-  border-bottom: 1px solid #F9F9F9;
+  border-bottom: 1px solid #f9f9f9;
 }
 
 .leaderProfile {
@@ -87,14 +85,14 @@
   height: 36px;
   border-radius: 50%;
   object-fit: cover;
-  background: #EEE;
+  background: #eee;
 }
 
 .leaderName {
   font-weight: 700;
   font-size: 14px;
   margin: 0;
-  color: #1A1A1A;
+  color: #1a1a1a;
 }
 
 .leaderMeta {
@@ -111,5 +109,11 @@
   font-size: 14px;
 }
 
-.upArrow { color: #27AE60; font-size: 10px; }
-.downArrow { color: #EB5757; font-size: 10px; }
+.upArrow {
+  color: #27ae60;
+  font-size: 10px;
+}
+.downArrow {
+  color: #eb5757;
+  font-size: 10px;
+}

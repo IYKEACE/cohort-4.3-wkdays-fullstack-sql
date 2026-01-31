@@ -1,6 +1,6 @@
-import React from 'react'
+import React from "react";
 import styles from "./leaderboard.module.css";
-import { usersData, groupsData } from './utils/LeaderboardData';
+import { usersData, groupsData } from "./utils/LeaderboardData";
 
 const Leaderboard = () => {
   return (
@@ -59,8 +59,6 @@ const Leaderboard = () => {
           </div>
         </div>
       </div>
-
-      {/* 2. Strongest Topics */}
       <div className={styles.infoCard}>
         <h3 className={styles.cardTitle}>Strongest Topics</h3>
         <div className={styles.topicItem}>
@@ -170,6 +168,6 @@ const Leaderboard = () => {
       </div>
     </div>
   );
-}
+};
 
-export default Leaderboard
+export default Leaderboard;

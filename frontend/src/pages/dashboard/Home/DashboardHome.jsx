@@ -98,7 +98,6 @@ const DashboardHome = () => {
               </div>
               {/* The Blue Bars */}
               <div className={styles.barsContainer}>
-                {/* Each group is one day with two blue bars */}
                 <div className={styles.barGroup}>
                   <div className={styles.barPair}>
                     <div
@@ -260,7 +259,7 @@ const DashboardHome = () => {
           </div>
         </div>
       </div>
-      <Leaderboard/>
+      <Leaderboard />
     </div>
   );
 };
