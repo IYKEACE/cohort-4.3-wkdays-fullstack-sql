@@ -9,52 +9,79 @@ const Leaderboard = () => {
         <h3 className={styles.cardTitle}>Weakest Topics</h3>
         <div className={styles.topicItem}>
           <div className={styles.topicInfo}>
-            <div className={styles.topicHeader}>
-              <span className={styles.topicName}>Food Safety</span>
-              <span className={styles.topicPercent}>
-                74% <small>Correct</small>
-              </span>
+            <div className={styles.topicRow}>
+              <img
+                src="/food.png"
+                className={styles.topicThumb}
+                alt="Food Safety"
+              />
+              <div className={styles.topicContent}>
+                <div className={styles.topicHeader}>
+                  <span className={styles.topicName}>Food Safety</span>
+                  <span className={styles.topicPercent}>
+                    74% <small>Correct</small>
+                  </span>
+                </div>
+                <div className={styles.progressTrack}>
+                  <div
+                    className={styles.progressBar}
+                    style={{
+                      width: "74%",
+                      background: "linear-gradient(90deg, #FF708B, #FF4646)",
+                    }}
+                  ></div>
+                </div>
+              </div>
             </div>
-            <div className={styles.progressTrack}>
-              <div
-                className={styles.progressBar}
-                style={{
-                  width: "74%",
-                  background: "linear-gradient(90deg, #FF708B, #FF4646)",
-                }}
-              ></div>
+            <div className={styles.topicRow}>
+              <img
+                src="/basics.png"
+                className={styles.topicThumb}
+                alt="Food Safety"
+              />
+              <div className={styles.topicContent}>
+                <div className={styles.topicHeader}>
+                  <span className={styles.topicName}>
+                    Compliance Basics Procedures
+                  </span>
+                  <span className={styles.topicPercent}>
+                    52% <small>Correct</small>
+                  </span>
+                </div>
+                <div className={styles.progressTrack}>
+                  <div
+                    className={styles.progressBar}
+                    style={{
+                      width: "52%",
+                      background: "linear-gradient(90deg, #FF708B, #FF4646)",
+                    }}
+                  ></div>
+                </div>
+              </div>
             </div>
-            <div className={styles.topicHeader}>
-              <span className={styles.topicName}>
-                Compliance Basics Procedures
-              </span>
-              <span className={styles.topicPercent}>
-                52% <small>Correct</small>
-              </span>
-            </div>
-            <div className={styles.progressTrack}>
-              <div
-                className={styles.progressBar}
-                style={{
-                  width: "52%",
-                  background: "linear-gradient(90deg, #FF708B, #FF4646)",
-                }}
-              ></div>
-            </div>
-            <div className={styles.topicHeader}>
-              <span className={styles.topicName}>Company Networking</span>
-              <span className={styles.topicPercent}>
-                36% <small>Correct</small>
-              </span>
-            </div>
-            <div className={styles.progressTrack}>
-              <div
-                className={styles.progressBar}
-                style={{
-                  width: "36%",
-                  background: "linear-gradient(90deg, #FF708B, #FF4646)",
-                }}
-              ></div>
+            <div className={styles.topicRow}>
+              <img
+                src="/network.png"
+                className={styles.topicThumb}
+                alt="Network Safety"
+              />
+              <div className={styles.topicContent}>
+                <div className={styles.topicHeader}>
+                  <span className={styles.topicName}>Company Networking</span>
+                  <span className={styles.topicPercent}>
+                    34% <small>Correct</small>
+                  </span>
+                </div>
+                <div className={styles.progressTrack}>
+                  <div
+                    className={styles.progressBar}
+                    style={{
+                      width: "35%",
+                      background: "linear-gradient(90deg, #FF708B, #FF4646)",
+                    }}
+                  ></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -63,50 +90,73 @@ const Leaderboard = () => {
         <h3 className={styles.cardTitle}>Strongest Topics</h3>
         <div className={styles.topicItem}>
           <div className={styles.topicInfo}>
-            <div className={styles.topicHeader}>
-              <span className={styles.topicName}>Covid Protocols</span>
-              <span className={styles.topicPercent}>
-                95% <small>Correct</small>
-              </span>
+            <div className={styles.topicRow}>
+              <img
+                src="/protocol.png"
+                className={styles.topicThumb}
+                alt="Covid"
+              />
+              <div className={styles.topicContent}>
+                <div className={styles.topicHeader}>
+                  <span className={styles.topicName}>Covid Protocols</span>
+                  <span className={styles.topicPercent}>
+                    95% <small>Correct</small>
+                  </span>
+                </div>
+                <div className={styles.progressTrack}>
+                  <div
+                    className={styles.progressBar}
+                    style={{
+                      width: "85%",
+                      background: "linear-gradient(90deg, #36E39F, #27AE60)",
+                    }}
+                  ></div>
+                </div>
+              </div>
             </div>
-            <div className={styles.progressTrack}>
-              <div
-                className={styles.progressBar}
-                style={{
-                  width: "85%",
-                  background: "linear-gradient(90deg, #36E39F, #27AE60)",
-                }}
-              ></div>
+            <div className={styles.topicRow}>
+              <img src="/cyber.png" className={styles.topicThumb} alt="Cyber" />
+              <div className={styles.topicContent}>
+                <div className={styles.topicHeader}>
+                  <span className={styles.topicName}>
+                    Cyber Security Basics
+                  </span>
+                  <span className={styles.topicPercent}>
+                    92% <small>Correct</small>
+                  </span>
+                </div>
+                <div className={styles.progressTrack}>
+                  <div
+                    className={styles.progressBar}
+                    style={{
+                      width: "69%",
+                      background: "linear-gradient(90deg, #36E39F, #27AE60)",
+                    }}
+                  ></div>
+                </div>
+              </div>
             </div>
-            <div className={styles.topicHeader}>
-              <span className={styles.topicName}>Cyber Security Basics</span>
-              <span className={styles.topicPercent}>
-                92% <small>Correct</small>
-              </span>
-            </div>
-            <div className={styles.progressTrack}>
-              <div
-                className={styles.progressBar}
-                style={{
-                  width: "69%",
-                  background: "linear-gradient(90deg, #36E39F, #27AE60)",
-                }}
-              ></div>
-            </div>
-            <div className={styles.topicHeader}>
-              <span className={styles.topicName}>Social Media Policies</span>
-              <span className={styles.topicPercent}>
-                89% <small>Correct</small>
-              </span>
-            </div>
-            <div className={styles.progressTrack}>
-              <div
-                className={styles.progressBar}
-                style={{
-                  width: "55%",
-                  background: "linear-gradient(90deg, #36E39F, #27AE60)",
-                }}
-              ></div>
+            <div className={styles.topicRow}>
+              <img src="/media.png" className={styles.topicThumb} alt="Media" />
+              <div className={styles.topicContent}>
+                <div className={styles.topicHeader}>
+                  <span className={styles.topicName}>
+                    Social Media Policies
+                  </span>
+                  <span className={styles.topicPercent}>
+                    92% <small>Correct</small>
+                  </span>
+                </div>
+                <div className={styles.progressTrack}>
+                  <div
+                    className={styles.progressBar}
+                    style={{
+                      width: "59%",
+                      background: "linear-gradient(90deg, #36E39F, #27AE60)",
+                    }}
+                  ></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
