@@ -14,8 +14,6 @@ const DashboardHome = () => {
         </Link>
       </div>
       <hr className={styles.divider} />
-
-      {/* Filter Bar */}
       <div className={styles.filterBar}>
         <div className={styles.filterGroup}>
           <label>Timeframe:</label>
@@ -38,7 +36,6 @@ const DashboardHome = () => {
       </div>
 
       <div className={styles.topSection}>
-        {/* Left Grid: 6 Stats Cards */}
         <div className={styles.statsColumn}>
           <div className={styles.statCard}>
             <span className={styles.cardLabel}>Active Users</span>
@@ -59,6 +56,33 @@ const DashboardHome = () => {
               Starting Knowledge <BiInfoCircle />
             </span>
             <h2 className={styles.cardValue}>64%</h2>
+
+            <div className={styles.sparklineWrapper}>
+              <svg
+                width="100%"
+                height="50"
+                viewBox="0 0 120 50"
+                preserveAspectRatio="none"
+              >
+                <defs>
+                  <linearGradient id="gradientFill" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="#3B82F6" stopOpacity="0.2" />
+                    <stop offset="100%" stopColor="#3B82F6" stopOpacity="0" />
+                  </linearGradient>
+                </defs>
+                <path
+                  d="M0 40 C20 40 35 10 55 10 C75 10 85 35 120 30 V50 H0Z"
+                  fill="url(#gradientFill)"
+                />
+                <path
+                  d="M0 40 C20 40 35 10 55 10 C75 10 85 35 120 30"
+                  stroke="#1B59F8"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  fill="none"
+                />
+              </svg>
+            </div>
           </div>
           <div className={styles.statCard}>
             <span className={styles.cardLabel}>
@@ -79,6 +103,18 @@ const DashboardHome = () => {
             <h3>Activity</h3>
             <select className={styles.monthSelect}>
               <option>Month</option>
+              <option>January</option>
+              <option>February</option>
+              <option>March</option>
+              <option>April</option>
+              <option>May</option>
+              <option>June</option>
+              <option>July</option>
+              <option>August</option>
+              <option>September</option>
+              <option>October</option>
+              <option>November</option>
+              <option>December</option>
             </select>
           </div>
 
