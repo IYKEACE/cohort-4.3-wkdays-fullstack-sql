@@ -276,3 +276,56 @@
   transition: 0.3s;
 }
 
+
+
+
+.titleArea {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.hamburgerIcon {
+  display: block; 
+  font-size: 26px;
+  cursor: pointer;
+  color: #1a1a1a;
+}
+
+@media (min-width: 769px) {
+  .hamburgerIcon {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .hamburgerIcon {
+    display: block;
+  }
+  
+  .header h1 {
+    font-size: 18px;
+  }
+}
+@media (max-width: 768px) {
+  .topSection {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .statsColumn {
+    width: 100%;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .activityChartCard {
+    width: 100%;
+    min-height: 300px;
+  }
+  .filterBar {
+    flex-wrap: wrap;
+  }
+
+  .filterGroup {
+    flex: 1 1 calc(50% - 15px);
+    min-width: 150px;
+  }
+}

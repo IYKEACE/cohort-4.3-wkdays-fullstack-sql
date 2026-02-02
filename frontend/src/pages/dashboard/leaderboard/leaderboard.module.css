@@ -134,3 +134,17 @@
   color: #eb5757;
   font-size: 10px;
 }
+
+@media (max-width: 768px) {
+  /* This assumes you have a wrapper around your leaderboard cards */
+  .leaderboardWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  /* Ensure cards take full width when stacked */
+  .infoCard {
+    width: 100% !important;
+  }
+}

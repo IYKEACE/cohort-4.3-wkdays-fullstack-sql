@@ -1,14 +1,22 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
+import { GiHamburgerMenu } from "react-icons/gi";
 import { BiDownload, BiInfoCircle } from "react-icons/bi";
 import styles from "./dashboardHome.module.css";
 import Leaderboard from "../leaderboard/Leaderboard";
 
 const DashboardHome = () => {
+  const { toggleMenu } = useOutletContext();
   return (
     <div className={styles.reportsContainer}>
       <div className={styles.header}>
-        <h1>Reports</h1>
+        <div className={styles.titleArea}>
+          <GiHamburgerMenu
+            className={styles.hamburgerIcon}
+            onClick={toggleMenu}
+          />
+          <h1>Reports</h1>
+        </div>
         <Link to="#" className={styles.downloadLink}>
           <BiDownload /> Download
         </Link>
@@ -60,7 +68,7 @@ const DashboardHome = () => {
             <div className={styles.sparklineWrapper}>
               <svg
                 width="100%"
-                height="50"
+                height="64"
                 viewBox="0 0 120 50"
                 preserveAspectRatio="none"
               >
@@ -89,12 +97,64 @@ const DashboardHome = () => {
               Current Knowledge <BiInfoCircle />
             </span>
             <h2 className={styles.cardValue}>86%</h2>
+            <div className={styles.sparklineWrapper}>
+              <svg
+                width="100%"
+                height="90"
+                viewBox="0 0 120 50"
+                preserveAspectRatio="none"
+              >
+                <defs>
+                  <linearGradient id="gradientFill" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="#3B82F6" stopOpacity="0.2" />
+                    <stop offset="100%" stopColor="#3B82F6" stopOpacity="0" />
+                  </linearGradient>
+                </defs>
+                <path
+                  d="M0 40 C20 40 35 10 55 10 C75 10 85 35 120 30 V50 H0Z"
+                  fill="url(#gradientFill)"
+                />
+                <path
+                  d="M0 40 C20 40 35 10 55 10 C75 10 85 35 120 30"
+                  stroke="#1B59F8"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  fill="none"
+                />
+              </svg>
+            </div>
           </div>
           <div className={styles.statCard}>
             <span className={styles.cardLabel}>
               Knowledge Gain <BiInfoCircle />
             </span>
             <h2 className={styles.cardValue}>+34%</h2>
+            <div className={styles.sparklineWrapper}>
+              <svg
+                width="100%"
+                height="40"
+                viewBox="0 0 120 50"
+                preserveAspectRatio="none"
+              >
+                <defs>
+                  <linearGradient id="gradientFill" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="#3B82F6" stopOpacity="0.2" />
+                    <stop offset="100%" stopColor="#3B82F6" stopOpacity="0" />
+                  </linearGradient>
+                </defs>
+                <path
+                  d="M0 40 C20 40 35 10 55 10 C75 10 85 35 120 30 V50 H0Z"
+                  fill="url(#gradientFill)"
+                />
+                <path
+                  d="M0 40 C20 40 35 10 55 10 C75 10 85 35 120 30"
+                  stroke="#1B59F8"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  fill="none"
+                />
+              </svg>
+            </div>
           </div>
         </div>
 
