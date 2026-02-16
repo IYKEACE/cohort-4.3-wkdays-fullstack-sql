@@ -18,21 +18,17 @@ const ForgotPassword = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch(
-        "http://localhost:2025/api/v1/auth/forgot-password",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData),
-        }
-      );
-      console.log("RES", res);
+      const res = await fetch("http://localhost:2025/api/v1/forgetPassword", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      console.log("res", res);
       const data = await res.json();
       console.log("DATA FORGOT PASSWORD VALUES", data);
 
       if (res.status === 200) {
         toast.success(data.message || "Password reset email sent!");
-        // Redirect to login page
         navigate("/auth/verify-otp");
       } else {
         toast.error(data.error || "Unable to send reset email");
@@ -67,11 +63,11 @@ const ForgotPassword = () => {
         <div className={styles.authLinkContainer}>
           <p>
             Don't have an account?{" "}
-            <Link className={styles.authLink} to="/auth/register">
+            <Link className={styles.authLink} to="/register">
               Register
             </Link>
           </p>
-          <Link className={styles.authLink} to="/auth/forgot-password">
+          <Link className={styles.authLink} to="/forgotPassword">
             Forgot password?
           </Link>
         </div>

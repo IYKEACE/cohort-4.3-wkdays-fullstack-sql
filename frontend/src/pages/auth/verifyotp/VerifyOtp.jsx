@@ -19,7 +19,7 @@ const VerifyOtp = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch("http://localhost:2025/api/v1/auth/login", {
+      const res = await fetch("http://localhost:2025/api/v1/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
