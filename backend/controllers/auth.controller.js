@@ -11,6 +11,7 @@ import {
   registerUser,
   findEmail,
   passwordReset,
+  findIfEmailExist
 } from "../database/queries/sql.js";
 
 // Full CRUD application
@@ -133,9 +134,8 @@ export const forgotPassword = async (req, res) => {
   try {
     const { email } = req.body;
 
-    // Check if transporter is ready
     if (!process.env.SMTP_USER || !process.env.SMTP_PASS) {
-      console.error("❌ Email password not configured");
+      console.error("❌ Email credentials not configured");
       return res.status(503).json({
         message: "Email service not configured properly",
       });
@@ -206,7 +206,7 @@ export const forgotPassword = async (req, res) => {
         message:
           "Email service temporarily unavailable. Please try again later.",
       });
-    } 
+    }
 
     console.error("❌ forgotPassword error:", error);
     return res.status(500).json({
@@ -214,7 +214,6 @@ export const forgotPassword = async (req, res) => {
     });
   }
 };
-
 
 /**
  * Reset password
