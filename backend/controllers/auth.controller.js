@@ -11,7 +11,7 @@ import {
   registerUser,
   findEmail,
   passwordReset,
-  findIfEmailExist
+  forgetPassword,
 } from "../database/queries/sql.js";
 
 // Full CRUD application
@@ -141,7 +141,7 @@ export const forgotPassword = async (req, res) => {
       });
     }
 
-    const { rows } = await pool.query(findIfEmailExist, [email]);
+    const { rows } = await pool.query(findEmail, [email]);
     if (!rows[0]) {
       return res.status(401).json({
         message: "User does not exist. Kindly register.",

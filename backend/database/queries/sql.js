@@ -10,6 +10,12 @@ export const passwordReset = `
   WHERE email = $2
 `;
 
+export const forgetPassword = `
+  UPDATE users
+  SET otp = $1, otp_expires = $2
+  WHERE email = $3
+`;
+
 export const singleUserById = "SELECT * FROM users WHERE id = $1";
 
 export const allUsers = "SELECT * FROM users ORDER BY id ASC";
