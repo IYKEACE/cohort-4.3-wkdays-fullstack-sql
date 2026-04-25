@@ -104,8 +104,8 @@ const transporter = nodemailer.createTransport({
   port: 465,
   secure: true,
   auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS,
   },
   // Connection settings
   connectionTimeout: 10000,
@@ -134,7 +134,7 @@ export const forgotPassword = async (req, res) => {
     const { email } = req.body;
 
     // Check if transporter is ready
-    if (!transporter.options.auth.pass) {
+    if (!process.env.SMTP_USER || !process.env.SMTP_PASS) {
       console.error("❌ Email password not configured");
       return res.status(503).json({
         message: "Email service not configured properly",
@@ -161,7 +161,7 @@ export const forgotPassword = async (req, res) => {
     for (let attempt = 1; attempt <= 3; attempt++) {
       try {
         await transporter.sendMail({
-          from: `"Support Team" <${process.env.EMAIL_USER}>`,
+          from: `"Support Team" <${process.env.SMTP_USER}>`,
           to: email,
           subject: "Password Reset OTP",
           text: `Your OTP is ${otp}. It expires in 10 minutes.`,
