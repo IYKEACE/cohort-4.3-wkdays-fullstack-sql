@@ -18,11 +18,14 @@ const ForgotPassword = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch("http://localhost:2025/api/v1/forgetPassword", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+      const res = await fetch(
+        "https://cohort-4-3-wkdays-fullstack-sql-2a8w.onrender.com/api/v1/forgetPassword",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        },
+      );
       console.log("res", res);
       const data = await res.json();
       console.log("DATA FORGOT PASSWORD VALUES", data);

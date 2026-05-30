@@ -10,7 +10,7 @@ import Apps from "./apps/Apps.jsx";
 import Profile from "./dashboard/profile/Profile.jsx";
 import Login from "./auth/login/Login.jsx";
 import Register from "./auth/register/Register.jsx";
-import ForgotPassword from "./auth/forgotPassword/ForgotPassword.jsx";
+import ForgotPassword from "./auth/forgotpassword/ForgotPassword.jsx";
 import Settings from "./dashboard/settings/Settings.jsx";
 import Users from "./dashboard/users/Users.jsx";
 
