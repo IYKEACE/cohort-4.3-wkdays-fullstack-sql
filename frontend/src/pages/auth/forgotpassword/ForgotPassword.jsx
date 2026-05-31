@@ -26,16 +26,26 @@ const ForgotPassword = () => {
           body: JSON.stringify(formData),
         },
       );
-      console.log("res", res);
+
       const data = await res.json();
-      console.log("DATA FORGOT PASSWORD VALUES", data);
 
       if (res.status === 200) {
-        toast.success(data.message || "Password reset email sent!");
+        toast.success(data.message); // "OTP sent to your email"
         navigate("/auth/verify-otp");
-      } else {
-        toast.error(data.error || "Unable to send reset email");
+        return;
       }
+
+      if (res.status === 401) {
+        toast.error(data.message); // "User does not exist. Kindly register."
+        return;
+      }
+
+      if (res.status === 503) {
+        toast.error(data.message); // "Email service temporarily unavailable..."
+        return;
+      }
+
+      toast.error(data.message || "Unable to send reset email");
     } catch (error) {
       console.error(error);
       toast.error("Something went wrong");
@@ -66,12 +76,12 @@ const ForgotPassword = () => {
         <div className={styles.authLinkContainer}>
           <p>
             Don't have an account?{" "}
-            <Link className={styles.authLink} to="/register">
+            <Link className={styles.authLink} to="/auth/register">
               Register
             </Link>
           </p>
-          <Link className={styles.authLink} to="/forgotPassword">
-            Forgot password?
+          <Link className={styles.authLink} to="/auth/login">
+            Back to Login
           </Link>
         </div>
       </form>

@@ -16,6 +16,7 @@ import {
   Settings,
   Users,
   ForgotPassword,
+  VerifyOtp
 } from "./pages/index";
 import Layout from "./layout/Layout";
 import AuthLayout from "./authlayout/AuthLayout";
@@ -43,6 +44,7 @@ const App = () => {
           <Route path="/auth/login" element={<Login />} />
           <Route path="/auth/register" element={<Register />} />
           <Route path="/auth/forgot-password" element={<ForgotPassword />} />
+          <Route path="/auth/verify-otp" element={<VerifyOtp />} />
         </Route>
         <Route
           path="/dashboard"
