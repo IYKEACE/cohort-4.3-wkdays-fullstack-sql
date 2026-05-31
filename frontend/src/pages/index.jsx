@@ -13,6 +13,7 @@ import Register from "./auth/register/Register.jsx";
 import ForgotPassword from "./auth/forgotpassword/ForgotPassword.jsx";
 import Settings from "./dashboard/settings/Settings.jsx";
 import Users from "./dashboard/users/Users.jsx";
+import VerifyOtp from "./auth/verifyotp/VerifyOtp.jsx";
 
 export {
   About,
@@ -30,4 +31,5 @@ export {
   Settings,
   Users,
   ForgotPassword,
+  VerifyOtp,
 };

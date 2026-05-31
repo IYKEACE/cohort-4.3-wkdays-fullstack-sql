@@ -16,7 +16,7 @@ import {
   Settings,
   Users,
   ForgotPassword,
-  VerifyOtp
+  VerifyOtp,
 } from "./pages/index";
 import Layout from "./layout/Layout";
 import AuthLayout from "./authlayout/AuthLayout";

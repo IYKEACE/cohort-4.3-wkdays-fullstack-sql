@@ -6,7 +6,7 @@ import styles from "./login.module.css";
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
-  const [message, setMessage] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -20,23 +20,30 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch("http://localhost:2025/api/v1/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-      console.log("RES", res);
+      const res = await fetch(
+        "https://cohort-4-3-wkdays-fullstack-sql-2a8w.onrender.com/api/v1/login",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        },
+      );
+
       const data = await res.json();
-      console.log("DATA LOGIN VALUES", data);
 
       if (res.status === 200) {
         login(data.token);
-
-        toast.success(data.message || "Login successful!");
+        toast.success(data.message);
         navigate("/dashboard");
-      } else {
-        toast.error(data.error || "Login failed");
+        return;
       }
+
+      if (res.status === 401) {
+        toast.error(data.error);
+        return;
+      }
+
+      toast.error(data.error || "Login failed");
     } catch (error) {
       console.error(error);
       toast.error("Something went wrong");
@@ -60,15 +67,28 @@ const Login = () => {
             required
           />
         </div>
-        <div>
+        <div style={{ position: "relative" }}>
           <input
             name="password"
-            type="password"
+            type={showPassword ? "text" : "password"}
             placeholder="Enter password"
             value={formData.password}
             onChange={handleChange}
             required
           />
+          <span
+            onClick={() => setShowPassword(!showPassword)}
+            style={{
+              position: "absolute",
+              right: "10px",
+              top: "50%",
+              transform: "translateY(-50%)",
+              cursor: "pointer",
+              userSelect: "none",
+            }}
+          >
+            {showPassword ? "🙈" : "👁️"}
+          </span>
         </div>
 
         <button type="submit">Submit</button>

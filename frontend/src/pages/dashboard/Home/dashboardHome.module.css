@@ -1,11 +1,20 @@
+/* ─── CONTAINER ─────────────────────────────── */
 .reportsContainer {
   width: 100%;
+  max-width: 1400px;
 }
 
+/* ─── HEADER ─────────────────────────────────── */
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.titleArea {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .header h1 {
@@ -14,42 +23,65 @@
   color: #1a1a1a;
 }
 
+.hamburgerIcon {
+  display: none;
+  font-size: 22px;
+  cursor: pointer;
+  color: #1a1a1a;
+}
+
 .downloadLink {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
   text-decoration: none;
-  color: #666;
+  color: #888;
   font-size: 13px;
   font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid #ebebeb;
+  background: #fff;
+  transition: background 0.2s, color 0.2s;
 }
 
+.downloadLink:hover {
+  background: #f4f7fe;
+  color: #1B59F8;
+}
+
+/* ─── DIVIDER ─────────────────────────────────── */
 .divider {
   border: none;
   border-top: 1px solid #eee;
-  margin: 15px 0 25px 0;
+  margin: 16px 0 24px;
 }
 
+/* ─── FILTER BAR ─────────────────────────────── */
 .filterBar {
   display: flex;
-  gap: 15px;
-  margin-bottom: 25px;
+  gap: 12px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
 }
 
 .filterGroup {
-  flex: 1;
+  flex: 1 1 140px;
   display: flex;
   align-items: center;
   background: #fff;
-  padding: 8px 15px;
+  padding: 8px 14px;
   border-radius: 10px;
   border: 1px solid #f0f0f0;
+  min-width: 0;
 }
 
 .filterGroup label {
   font-size: 13px;
   color: #888;
-  margin-right: 10px;
+  margin-right: 8px;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .filterGroup select {
@@ -58,49 +90,65 @@
   font-weight: 700;
   outline: none;
   flex: 1;
+  min-width: 0;
+  font-size: 13px;
+  color: #1a1a1a;
+  cursor: pointer;
 }
 
+/* ─── TOP SECTION ────────────────────────────── */
 .topSection {
   display: flex;
   gap: 20px;
+  align-items: flex-start;
 }
 
+/* ─── STATS COLUMN ───────────────────────────── */
 .statsColumn {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 15px;
-  width: 60%; 
+  gap: 14px;
+  width: 58%;
+  flex-shrink: 0;
 }
 
 .statCard {
   background: #ffffff;
   border-radius: 12px;
-  padding: 16px;
+  padding: 16px 16px 0;
   display: flex;
   flex-direction: column;
   position: relative;
   min-height: 100px;
-  overflow: hidden; 
+  overflow: hidden;
+  border: 1px solid #f2f2f2;
+  transition: box-shadow 0.2s;
+}
+
+.statCard:hover {
+  box-shadow: 0 4px 16px rgba(27, 89, 248, 0.06);
 }
 
 .cardLabel {
-  font-size: 12px;
+  font-size: 11.5px;
   color: #8C8C8C;
   display: flex;
   align-items: center;
   gap: 4px;
+  font-weight: 500;
 }
 
 .cardLabel svg {
-  font-size: 14px;
+  font-size: 13px;
   color: #ccc;
 }
 
 .cardValue {
   font-size: 24px;
   font-weight: 700;
-  margin-top: 8px;
-  color: #333;
+  margin-top: 6px;
+  color: #1a1a1a;
+  margin-bottom: 0;
 }
 
 .cardValue span {
@@ -108,6 +156,7 @@
   color: #ccc;
   font-weight: 400;
 }
+
 .sparklineWrapper {
   position: absolute;
   bottom: 0;
@@ -120,8 +169,11 @@
   width: 100%;
   display: block;
 }
+
+/* ─── ACTIVITY CHART CARD ────────────────────── */
 .activityChartCard {
-  flex: 1; 
+  flex: 1;
+  min-width: 0;
   background: white;
   padding: 20px;
   border-radius: 12px;
@@ -134,34 +186,32 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 8px;
 }
 
 .chartHeader h3 {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
+  color: #1a1a1a;
 }
 
 .monthSelect {
-  border: none;
+  border: 1px solid #ebebeb;
+  border-radius: 6px;
   font-weight: 600;
+  font-size: 13px;
   color: #666;
   outline: none;
+  padding: 4px 8px;
+  background: transparent;
+  cursor: pointer;
 }
-
-.chartPlaceholder {
-  flex: 1;
-  background-color: #f9f9f9; 
-  border-radius: 8px;
-  min-height: 200px;
-}
-
 
 .chartWrapper {
   display: flex;
-  height: 250px;
-  gap: 15px;
-  margin-top: 20px;
+  height: 220px;
+  gap: 10px;
+  margin-top: 12px;
 }
 
 .yAxis {
@@ -169,22 +219,23 @@
   flex-direction: column;
   justify-content: space-between;
   color: #BABABA;
-  font-size: 12px;
-  padding-bottom: 20px;
+  font-size: 11px;
+  padding-bottom: 22px;
+  flex-shrink: 0;
 }
 
 .chartContent {
   flex: 1;
-  position: relative; 
+  min-width: 0;
+  position: relative;
   display: flex;
   flex-direction: column;
 }
 
-/* Background Lines */
 .gridLines {
   position: absolute;
   width: 100%;
-  height: calc(100% - 20px);
+  height: calc(100% - 22px);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -193,10 +244,9 @@
 
 .line {
   width: 100%;
-  border-top: 1px solid #F2F2F2;
+  border-top: 1px dashed #f0f0f0;
 }
 
-/* The Bars */
 .barsContainer {
   position: relative;
   z-index: 2;
@@ -211,89 +261,60 @@
   flex-direction: column;
   align-items: center;
   height: 100%;
+  flex: 1;
 }
 
 .barPair {
   display: flex;
   align-items: flex-end;
-  gap: 4px;
+  gap: 3px;
   height: 100%;
   padding-bottom: 5px;
+  flex: 1;
+  justify-content: center;
 }
 
 .darkBar {
-  width: 8px;
+  width: 7px;
   background-color: #1B59F8;
-  border-radius: 10px;
+  border-radius: 4px 4px 0 0;
+  transition: opacity 0.2s;
 }
 
 .lightBar {
-  width: 8px;
+  width: 7px;
   background-color: #C6D7FF;
-  border-radius: 10px;
+  border-radius: 4px 4px 0 0;
+  transition: opacity 0.2s;
+}
+
+.barGroup:hover .darkBar,
+.barGroup:hover .lightBar {
+  opacity: 0.75;
 }
 
 .dayLabel {
-  font-size: 11px;
+  font-size: 10px;
   color: #BABABA;
   font-weight: 600;
-  margin-top: 8px;
-}
-.barPair {
-  display: flex;
-  align-items: flex-end; 
-  gap: 4px;
-  height: 100%;
-}
-
-.darkBar {
-  background-color: #1B59F8;
-}
-
-.lightBar {
-  background-color: #C6D7FF;
-}
-
-.statCard:nth-child(n+4) { 
-  position: relative;
-  overflow: hidden;
-}
-
-.statCard:nth-child(n+4)::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 40px;
-  background: linear-gradient(transparent, rgba(27, 89, 248, 0.1));
-  border-bottom: 2px solid #1B59F8; 
-  opacity: 0.6;
+  margin-top: 6px;
+  flex-shrink: 0;
 }
 
 .barGroup:hover .dayLabel {
   color: #1B59F8;
-  transition: 0.3s;
 }
 
-
-
-
-.titleArea {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.hamburgerIcon {
-  display: block; 
-  font-size: 26px;
-  cursor: pointer;
-  color: #1a1a1a;
+/* Sparkline accent on knowledge cards (4th, 5th, 6th) */
+.statCard:nth-child(n+4) {
+  padding-bottom: 52px;
 }
 
-@media (min-width: 769px) {
-  .hamburgerIcon {
-    display: none;
+/* ─── RESPONSIVE ─────────────────────────────── */
+@media (max-width: 1024px) {
+  .statsColumn {
+    grid-template-columns: repeat(2, 1fr);
+    width: 55%;
   }
 }
 
@@ -301,31 +322,59 @@
   .hamburgerIcon {
     display: block;
   }
-  
+
   .header h1 {
     font-size: 18px;
   }
-}
-@media (max-width: 768px) {
+
+  .filterBar {
+    gap: 10px;
+  }
+
+  .filterGroup {
+    flex: 1 1 calc(50% - 10px);
+    min-width: 140px;
+  }
+
   .topSection {
     flex-direction: column;
-    gap: 20px;
+    gap: 16px;
   }
+
   .statsColumn {
     width: 100%;
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
   }
+
   .activityChartCard {
     width: 100%;
-    min-height: 300px;
   }
-  .filterBar {
-    flex-wrap: wrap;
+
+  .chartWrapper {
+    height: 180px;
+  }
+
+  .darkBar,
+  .lightBar {
+    width: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .statsColumn {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cardValue {
+    font-size: 20px;
   }
 
   .filterGroup {
-    flex: 1 1 calc(50% - 15px);
-    min-width: 150px;
+    flex: 1 1 100%;
+  }
+
+  .dayLabel {
+    font-size: 8.5px;
   }
 }

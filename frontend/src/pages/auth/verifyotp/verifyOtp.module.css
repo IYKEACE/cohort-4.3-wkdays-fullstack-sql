@@ -13,15 +13,18 @@ input {
   padding: 10px 15px;
   width: 100%;
 }
+
 div.authLinkContainer {
   display: flex;
   align-items: center;
   gap: 0.6rem;
   justify-content: space-between;
 }
+
 .authLink {
   color: dodgerblue;
 }
+
 button {
   padding: 10px 15px;
   width: 100%;

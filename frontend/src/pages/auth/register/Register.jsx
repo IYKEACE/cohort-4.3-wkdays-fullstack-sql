@@ -11,8 +11,10 @@ const Register = () => {
     address: "",
     password: "",
   });
+  const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate();
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -22,20 +24,30 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form is being submitted...", formData);
 
     try {
-      const res = await fetch("http://localhost:2025/api/v1/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-      if (res.status === 201 || res.status === 204) {
-        toast.success("Registered successfully");
+      const res = await fetch(
+        "https://cohort-4-3-wkdays-fullstack-sql-2a8w.onrender.com/api/v1/register",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        },
+      );
+
+      const data = await res.json();
+
+      if (res.status === 201) {
+        toast.success(data.data.message);
         navigate("/auth/login");
         return;
       }
-      const data = await res.json();
+
+      if (res.status === 401) {
+        toast.error(data.message);
+        return;
+      }
+
       toast.error(data.error || "Registration failed");
     } catch (error) {
       console.error("Fetch Error:", error);
@@ -78,14 +90,27 @@ const Register = () => {
             onChange={handleChange}
           />
         </div>
-        <div>
+        <div style={{ position: "relative" }}>
           <input
             name="password"
-            type="password"
+            type={showPassword ? "text" : "password"}
             placeholder="enter password"
             value={formData.password}
             onChange={handleChange}
           />
+          <span
+            onClick={() => setShowPassword(!showPassword)}
+            style={{
+              position: "absolute",
+              right: "10px",
+              top: "50%",
+              transform: "translateY(-50%)",
+              cursor: "pointer",
+              userSelect: "none",
+            }}
+          >
+            {showPassword ? "🙈" : "👁️"}
+          </span>
         </div>
         <div>
           <input
